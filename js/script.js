@@ -42,7 +42,7 @@ window.onload = function(){
 		 surfDrops = [],
 		 surfModals = document.querySelectorAll('.surf__modal');
 
-
+	
 
 	promoDotsList.style.display = 'flex';
 	promoTitleItem.forEach(item => {
@@ -58,7 +58,7 @@ window.onload = function(){
 		surfDrops[i] = document.createElement('img');
 	}
 	surfDrops.forEach((drop, index) => {
-		drop.src = '../icons/surf/drop.svg';
+		drop.src = 'icons/surf/drop.svg';
 		drop.alt = 'drop';
 		drop.classList.add('surf__drop');
 		drop.style.top = (+getComputedStyle(surfDots[index]).top.slice(0, -2) + 25) + 'px';
@@ -92,7 +92,7 @@ window.onload = function(){
 	$('.carousel__wrapper').slick({
 		autoplay: false,
 		slidesToShow: 4,
-		slidesToScroll: 1,
+		slidesToScroll: 2,
 		arrows: true,
 		appendArrows: '.carousel__arrows',
 		prevArrow: prevArrow('carousel__arrow'),
@@ -112,4 +112,76 @@ window.onload = function(){
 		draggable: false,
 		fade: true
 	});
+
+	$('.sleep__slider').slick({
+		autoplay: false,
+		autoplaySpeed: 5000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: true,
+		appendArrows: '.sleep__arrows',
+		prevArrow: prevArrow('sleep__arrow'),
+		nextArrow: nextArrow('sleep__arrow'),
+		draggable: false,
+		fade: true
+	});
+
+	const sleepBooking = {
+		nights: 5,
+		guests: 4
+	}
+
+	const sleepNights = document.querySelector('.sleep-nights'),
+		 sleepGuests = document.querySelector('.sleep-guests'),
+		 sleepNightsMinus = document.querySelector('.sleep-nights-minus'),
+		 sleepNightsPlus = document.querySelector('.sleep-nights-plus'),
+		 sleepGuestsMinus = document.querySelector('.sleep-guests-minus'),
+		 sleepGuestsPlus = document.querySelector('.sleep-guests-plus');
+
+	sleepNightsMinus.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (+sleepNights.textContent.slice(0, 2) > 1) {
+			sleepNights.textContent = `${--sleepBooking.nights} Nights`;
+		}
+	});
+	sleepNightsPlus.addEventListener('click', (e) => {
+		e.preventDefault();
+		sleepNights.textContent = `${++sleepBooking.nights} Nights`;
+	});
+
+	sleepGuestsMinus.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (+sleepGuests.textContent.slice(0, 2) > 1) {
+			sleepGuests.textContent = `${--sleepBooking.guests} Guests`;
+		}
+	});
+	sleepGuestsPlus.addEventListener('click', (e) => {
+		e.preventDefault();
+		sleepGuests.textContent = `${++sleepBooking.guests} Guests`;
+	});
+
+	$('.shop__slider').slick({
+		autoplay: false,
+		autoplaySpeed: 5000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: true,
+		appendArrows: '.shop__arrows',
+		prevArrow: prevArrow('shop__arrow'),
+		nextArrow: nextArrow('shop__arrow'),
+		draggable: false,
+		fade: true
+	});
+
+	const shopSliderItems = document.querySelectorAll('.slider__item_grid');
+	shopSliderItems.forEach(item => {
+		item.style.display = 'grid';
+	});
+
+	const currentDate = new Date(),
+		 currentDay = document.querySelector('.promo__day'),
+		 currentMonthAndYear = document.querySelector('.promo__subdate');
+
+	currentDay.textContent = currentDate.getDate()
+	currentMonthAndYear.textContent = `${(currentDate.getMonth() + '').length < 2 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth()} | ${currentDate.getFullYear()}`
 }
